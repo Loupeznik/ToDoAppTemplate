@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Todos\Endpoints\" />
+      <Folder Include="Todos\Models\" />
+      <Folder Include="Users\Endpoints\" />
+      <Folder Include="Users\Models\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FastEndpoints" Version="5.21.2" />
+      <PackageReference Include="FastEndpoints.Security" Version="5.21.2" />
+      <PackageReference Include="FastEndpoints.Swagger" Version="5.21.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Domain\DZarsky.ToDoAppTemplate.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Domain\DZarsky.ToDoAppTemplate.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

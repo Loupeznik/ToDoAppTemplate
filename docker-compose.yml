@@ -1,0 +1,16 @@
+﻿services:
+  dzarsky.todoapptemplate.api:
+    image: dzarsky.todoapptemplate.api
+    depends_on:
+        - db
+    build:
+      context: .
+      dockerfile: DZarsky.ToDoAppTemplate.Api/Dockerfile
+  db:
+    image: postgres:15-alpine3.19
+    environment:
+      POSTGRES_USER: todoapp
+      POSTGRES_PASSWORD: TOD0app24
+      POSTGRES_DB: todoapp
+    ports:
+        - "54321:5432"
