@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DZarsky.ToDoAppTemplate.Data.Common;
+namespace DZarsky.ToDoAppTemplate.Data.Common.Mappings;
 
-internal abstract class BaseEntityConfiguration<TEntity>(string tableName) : IEntityTypeConfiguration<TEntity>
+public abstract class BaseEntityConfiguration<TEntity>(string tableName) : IEntityTypeConfiguration<TEntity>
     where TEntity : BaseEntity
 {
     private const string Now = "NOW()";

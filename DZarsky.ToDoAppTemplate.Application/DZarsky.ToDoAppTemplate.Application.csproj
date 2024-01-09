@@ -7,10 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Auth\Commands\" />
       <Folder Include="Todos\Commands\" />
       <Folder Include="Todos\Queries\" />
       <Folder Include="Users\Commands\" />
       <Folder Include="Users\Queries\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.2.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     </ItemGroup>
 
 </Project>

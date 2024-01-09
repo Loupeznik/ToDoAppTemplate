@@ -9,30 +9,36 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Todos\Endpoints\" />
       <Folder Include="Todos\Models\" />
+      <Folder Include="Todos\Validators\" />
       <Folder Include="Users\Endpoints\" />
       <Folder Include="Users\Models\" />
+      <Folder Include="Users\Validators\" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FastEndpoints" Version="5.21.2" />
       <PackageReference Include="FastEndpoints.Security" Version="5.21.2" />
       <PackageReference Include="FastEndpoints.Swagger" Version="5.21.2" />
+      <PackageReference Include="MediatR" Version="12.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Application\DZarsky.ToDoAppTemplate.Application.csproj" />
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Core\DZarsky.ToDoAppTemplate.Core.csproj" />
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Data\DZarsky.ToDoAppTemplate.Data.csproj" />
       <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Domain\DZarsky.ToDoAppTemplate.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Domain\DZarsky.ToDoAppTemplate.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace DZarsky.ToDoAppTemplate.Domain.Common.MediatR;
 
-public class MediatrBaseResult<TClass, TResultStatus> : IMediatrBaseResult where TClass : class
+public class MediatrBaseResult<TResult, TResultStatus> : IMediatrBaseResult where TResult : class 
 {
     public bool IsSuccess { get; set; }
 
@@ -8,9 +8,9 @@ public class MediatrBaseResult<TClass, TResultStatus> : IMediatrBaseResult where
 
     public TResultStatus Status { get; set; }
 
-    public TClass? Result { get; set; }
+    public TResult? Result { get; set; }
 
-    public MediatrBaseResult(bool isSuccess, TResultStatus status, TClass? result = null, string? message = null)
+    public MediatrBaseResult(bool isSuccess, TResultStatus status, TResult? result = null, string? message = null)
     {
         IsSuccess = isSuccess;
         Message = message;
@@ -32,12 +32,15 @@ public class MediatrBaseResult<TResultStatus> : IMediatrBaseResult
     public string? Message { get; set; }
 
     public TResultStatus? Status { get; set; }
+    
+    public IList<string> Errors { get; set; } = new List<string>();
 
-    public MediatrBaseResult(bool isSuccess, TResultStatus status, string? message = null)
+    public MediatrBaseResult(bool isSuccess, TResultStatus status, IList<string>? errors, string? message = null)
     {
         IsSuccess = isSuccess;
         Message = message;
         Status = status;
+        Errors = errors ?? new List<string>();
     }
 
     public MediatrBaseResult()
