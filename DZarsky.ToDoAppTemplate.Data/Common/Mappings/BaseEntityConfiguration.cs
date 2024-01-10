@@ -24,6 +24,8 @@ public abstract class BaseEntityConfiguration<TEntity>(string tableName) : IEnti
                .ValueGeneratedOnUpdate()
                .HasDefaultValueSql(Now);
 
+        builder.HasIndex(x => x.IsDeleted);
+        
         builder
             .HasQueryFilter(x => !x.IsDeleted);
     }
