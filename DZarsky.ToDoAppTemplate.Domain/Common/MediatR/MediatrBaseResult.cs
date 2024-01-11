@@ -1,49 +1,63 @@
-﻿namespace DZarsky.ToDoAppTemplate.Domain.Common.MediatR;
+﻿using System.Runtime.CompilerServices;
+using DZarsky.ToDoAppTemplate.Domain.Common.Errors;
+using DZarsky.ToDoAppTemplate.Domain.Common.Results;
 
-public class MediatrBaseResult<TResult, TResultStatus> : IMediatrBaseResult where TResult : class 
+namespace DZarsky.ToDoAppTemplate.Domain.Common.MediatR;
+
+public class MediatrBaseResult<TResult> : IMediatrBaseResult where TResult : class
 {
-    public bool IsSuccess { get; set; }
+    public bool IsSuccess => Status == ResultStatus.Success;
 
     public string? Message { get; set; }
 
-    public TResultStatus Status { get; set; }
+    public ResultStatus Status { get; set; }
 
     public TResult? Result { get; set; }
+    
+    public IList<ErrorDescription> Errors { get; set; } = new List<ErrorDescription>();
 
-    public MediatrBaseResult(bool isSuccess, TResultStatus status, TResult? result = null, string? message = null)
+    public MediatrBaseResult(ResultStatus status, TResult? result = null, IList<ErrorDescription>? errors = null, string? message = null)
     {
-        IsSuccess = isSuccess;
         Message = message;
         Result = result;
         Status = status;
+
+        if (errors != null)
+        {
+            Errors = errors;
+        }
     }
 
-    public MediatrBaseResult(TResultStatus status, string? message = null)
+    public MediatrBaseResult(ResultStatus status, IList<ErrorDescription>? errors = null, string? message = null)
     {
         Message = message;
         Status = status;
+        
+        if (errors != null)
+        {
+            Errors = errors;
+        }
     }
 }
 
-public class MediatrBaseResult<TResultStatus> : IMediatrBaseResult
+public class MediatrBaseResult : IMediatrBaseResult
 {
-    public bool IsSuccess { get; set; }
+    public bool IsSuccess => Status == ResultStatus.Success;
 
     public string? Message { get; set; }
 
-    public TResultStatus? Status { get; set; }
-    
-    public IList<string> Errors { get; set; } = new List<string>();
+    public ResultStatus Status { get; set; }
 
-    public MediatrBaseResult(bool isSuccess, TResultStatus status, IList<string>? errors, string? message = null)
+    public IList<ErrorDescription> Errors { get; set; } = new List<ErrorDescription>();
+
+    public MediatrBaseResult(ResultStatus status, IList<ErrorDescription>? errors, string? message = null)
     {
-        IsSuccess = isSuccess;
         Message = message;
         Status = status;
-        Errors = errors ?? new List<string>();
-    }
-
-    public MediatrBaseResult()
-    {
+        
+        if (errors != null)
+        {
+            Errors = errors;
+        }
     }
 }
