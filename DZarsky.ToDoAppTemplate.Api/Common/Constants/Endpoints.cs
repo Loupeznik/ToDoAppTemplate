@@ -2,7 +2,9 @@
 
 public static class Endpoints
 {
-    public const string Register = "/register";
-    public const string ResetPassword = "/reset-password";
-    public const string Login = "/login";
+    private const string AuthPrefix = "/auth";
+    
+    public const string Register = $"{AuthPrefix}/register";
+    public const string ResetPassword = $"{AuthPrefix}/reset-password";
+    public const string Login = $"{AuthPrefix}/login";
 }
