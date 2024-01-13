@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using DZarsky.ToDoAppTemplate.Api.Infrastructure.Security;
+using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Microsoft.IdentityModel.Protocols.Configuration;
@@ -25,12 +26,20 @@ internal static class ApiConfigurationExtensions
 
     internal static IServiceCollection AddEndpoints(this IServiceCollection services, IConfiguration configuration)
     {
+        var securityConfiguration = configuration.GetSection("Api").GetSection("Auth").Get<AuthConfiguration>() ??
+                                    throw new InvalidConfigurationException("No auth configuration found");
+
+        services.AddSingleton(securityConfiguration);
+
         services.SwaggerDocument();
         services
             .AddFastEndpoints()
-            .AddJWTBearerAuth(configuration.GetSection("Api").GetValue<string>("SigningKey") ??
-                              throw new InvalidConfigurationException("No signing key provider"))
+            .AddJWTBearerAuth(!string.IsNullOrWhiteSpace(securityConfiguration.SigningKey)
+                ? securityConfiguration.SigningKey
+                : throw new InvalidConfigurationException("No signing key found"))
             .AddAuthorization();
+
+        services.AddScoped<TokenGenerator>();
 
         return services;
     }
