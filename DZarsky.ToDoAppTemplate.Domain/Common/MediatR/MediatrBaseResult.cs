@@ -50,7 +50,7 @@ public class MediatrBaseResult : IMediatrBaseResult
 
     public IList<ErrorDescription> Errors { get; set; } = new List<ErrorDescription>();
 
-    public MediatrBaseResult(ResultStatus status, IList<ErrorDescription>? errors, string? message = null)
+    public MediatrBaseResult(ResultStatus status, IList<ErrorDescription>? errors = null, string? message = null)
     {
         Message = message;
         Status = status;

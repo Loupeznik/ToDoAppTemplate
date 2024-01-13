@@ -32,6 +32,6 @@ public sealed class AuthManager
             return new AuthResult(AuthResultStatus.InvalidLoginOrPassword);
         }
 
-        return new AuthResult(AuthResultStatus.Success, user.Id);
+        return new AuthResult(user.IsBlocked ? AuthResultStatus.UserInactive : AuthResultStatus.Success, user.Id);
     }
 }

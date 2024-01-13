@@ -16,4 +16,8 @@
       <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Data\DZarsky.ToDoAppTemplate.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Infrastructure\Communication\Email\Models\" />
+    </ItemGroup>
+
 </Project>

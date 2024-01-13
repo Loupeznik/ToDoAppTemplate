@@ -1,6 +1,7 @@
 ﻿using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using Microsoft.IdentityModel.Protocols.Configuration;
 
 namespace DZarsky.ToDoAppTemplate.Api.Infrastructure.Configuration;
 
@@ -13,19 +14,23 @@ internal static class ApiConfigurationExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseFastEndpoints(x => { x.Endpoints.RoutePrefix = "api"; });
+        app.UseFastEndpoints(x =>
+        {
+            x.Endpoints.RoutePrefix = "api";
+        });
         app.UseSwaggerGen();
 
         return app;
     }
 
-    internal static IServiceCollection AddEndpoints(this IServiceCollection services)
+    internal static IServiceCollection AddEndpoints(this IServiceCollection services, IConfiguration configuration)
     {
         services.SwaggerDocument();
         services
             .AddFastEndpoints()
-            .AddJWTBearerAuth(string.Empty) // todo: take jwk from configuration
-            .AddAuthorization(); 
+            .AddJWTBearerAuth(configuration.GetSection("Api").GetValue<string>("SigningKey") ??
+                              throw new InvalidConfigurationException("No signing key provider"))
+            .AddAuthorization();
 
         return services;
     }

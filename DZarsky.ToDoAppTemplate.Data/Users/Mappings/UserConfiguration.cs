@@ -1,6 +1,7 @@
 ﻿using DZarsky.ToDoAppTemplate.Data.Common.Constants;
 using DZarsky.ToDoAppTemplate.Data.Common.Mappings;
 using DZarsky.ToDoAppTemplate.Domain.Users;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DZarsky.ToDoAppTemplate.Data.Users.Mappings;
@@ -20,5 +21,9 @@ public sealed class UserConfiguration() : BaseEntityConfiguration<User>(Tables.U
 
         builder.Property(x => x.Email)
                .HasMaxLength(128);
+
+        builder
+            .Property(x => x.IsBlocked)
+            .HasDefaultValue(false);
     }
 }

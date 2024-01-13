@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Auth\Validators\" />
       <Folder Include="Todos\Endpoints\" />
       <Folder Include="Todos\Models\" />
       <Folder Include="Todos\Validators\" />
@@ -22,6 +23,10 @@
       <PackageReference Include="FastEndpoints.Security" Version="5.21.2" />
       <PackageReference Include="FastEndpoints.Swagger" Version="5.21.2" />
       <PackageReference Include="MediatR" Version="12.2.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

@@ -11,5 +11,7 @@ public sealed class User : BaseEntity
     
     public string? Email { get; set; }
     
+    public bool IsBlocked { get; set; }
+    
     public IList<Todo> Todos { get; set; } = new List<Todo>();
 }

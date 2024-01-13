@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Auth\Commands\" />
       <Folder Include="Todos\Commands\" />
       <Folder Include="Todos\Queries\" />
       <Folder Include="Users\Commands\" />
@@ -17,6 +16,11 @@
     <ItemGroup>
       <PackageReference Include="MediatR" Version="12.2.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Core\DZarsky.ToDoAppTemplate.Core.csproj" />
+      <ProjectReference Include="..\DZarsky.ToDoAppTemplate.Domain\DZarsky.ToDoAppTemplate.Domain.csproj" />
     </ItemGroup>
 
 </Project>
