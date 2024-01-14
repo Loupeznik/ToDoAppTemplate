@@ -10,9 +10,6 @@
 
     <ItemGroup>
       <Folder Include="Auth\Validators\" />
-      <Folder Include="Todos\Endpoints\" />
-      <Folder Include="Todos\Models\" />
-      <Folder Include="Todos\Validators\" />
       <Folder Include="Users\Endpoints\" />
       <Folder Include="Users\Models\" />
       <Folder Include="Users\Validators\" />
