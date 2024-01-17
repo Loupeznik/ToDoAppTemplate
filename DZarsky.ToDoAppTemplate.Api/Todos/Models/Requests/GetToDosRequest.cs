@@ -1,5 +1,5 @@
-﻿using DZarsky.ToDoAppTemplate.Api.Common.Interfaces;
-using DZarsky.ToDoAppTemplate.Api.Common.Models;
+﻿using DZarsky.ToDoAppTemplate.Api.Common.Models;
+using DZarsky.ToDoAppTemplate.Domain.Common;
 using FastEndpoints;
 
 namespace DZarsky.ToDoAppTemplate.Api.Todos.Models.Requests;
