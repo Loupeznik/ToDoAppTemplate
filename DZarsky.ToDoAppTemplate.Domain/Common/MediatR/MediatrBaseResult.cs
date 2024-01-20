@@ -6,7 +6,7 @@ namespace DZarsky.ToDoAppTemplate.Domain.Common.MediatR;
 
 public class MediatrBaseResult<TResult> : IMediatrBaseResult where TResult : class
 {
-    public bool IsSuccess => Status == ResultStatus.Success;
+    public bool IsSuccess => Status is ResultStatus.Success or ResultStatus.EntityCreated;
 
     public string? Message { get; set; }
 

@@ -1,7 +1,24 @@
-﻿using DZarsky.ToDoAppTemplate.Api.Common.Models;
+﻿using DZarsky.ToDoAppTemplate.Domain.Common.Results;
+using DZarsky.ToDoAppTemplate.Domain.Todos;
 
 namespace DZarsky.ToDoAppTemplate.Api.Todos.Models.Responses;
 
-public class GetToDosResponse : PagedResponse<GetToDoResponse>
+public sealed class GetToDosResponse : PagedResponse<IList<GetToDoResponse>>
 {
+    private GetToDosResponse(int page, int pageSize, int totalCount, int totalPages, IList<GetToDoResponse> data) :
+        base(page,
+            pageSize, totalCount, totalPages, data)
+    {
+    }
+
+    internal static GetToDosResponse MapFromQueryResult(PagedResponse<IList<Todo>> result)
+    {
+        return new GetToDosResponse(result.Page, result.PageSize, result.TotalCount, result.TotalPages,
+            result.Data.Select(GetToDoResponse.MapFromToDo).ToList());
+    }
+
+    internal static GetToDosResponse GetEmptyResponse()
+    {
+        return new GetToDosResponse(0, 0, 0, 0, new List<GetToDoResponse>());
+    }
 }
