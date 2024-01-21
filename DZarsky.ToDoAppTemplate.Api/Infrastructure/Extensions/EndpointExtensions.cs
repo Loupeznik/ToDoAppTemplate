@@ -44,14 +44,15 @@ internal static class EndpointExtensions
         {
             errors = result.Errors
                            .GroupBy(x => x.Key, x => x.Message)
-                           .ToDictionary(x => x.Key, x => x.ToList())!;
+                           .ToDictionary(x => x.Key.ToLowerInvariant(), x => x.ToList())!;
         }
 
         if (!result.IsSuccess)
         {
             return endpoint.HttpContext.Response.SendAsync(new ErrorResponse
             {
-                Message = result.Message ?? "An error has occured during the request",
+                StatusCode = result.Status.Resolve(),
+                Message = result.Message ?? "One or more errors occurred!",
                 Errors = errors
             }, result.Status.Resolve(), cancellation: ct);
         }

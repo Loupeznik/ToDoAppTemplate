@@ -25,5 +25,10 @@ public sealed class UserConfiguration() : BaseEntityConfiguration<User>(Tables.U
         builder
             .Property(x => x.IsBlocked)
             .HasDefaultValue(false);
+
+        builder.HasMany(x => x.PasswordResetCodes)
+               .WithOne(x => x.User)
+               .HasForeignKey(x => x.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

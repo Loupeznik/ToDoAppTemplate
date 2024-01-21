@@ -6,22 +6,20 @@ using MediatR;
 
 namespace DZarsky.ToDoAppTemplate.Api.Auth.Endpoints;
 
-public sealed class ResetPasswordEndpoint : Endpoint<PasswordResetRequest>
+public sealed class ChangePasswordEndpoint : Endpoint<PasswordChangeRequest>
 {
     private readonly IMediator _mediator;
 
-    public ResetPasswordEndpoint(IMediator mediator) => _mediator = mediator;
+    public ChangePasswordEndpoint(IMediator mediator) => _mediator = mediator;
 
     public override void Configure()
     {
-        Put(Common.Constants.Endpoints.ResetPassword);
-        AllowAnonymous();
+        Put(Common.Constants.Endpoints.ChangePassword);
     }
 
-    public override async Task HandleAsync(PasswordResetRequest request, CancellationToken ct)
+    public override async Task HandleAsync(PasswordChangeRequest request, CancellationToken ct)
     {
-        var result = await _mediator.Send(new ResetPasswordCommand(request.Login, request.Code, request.NewPassword),
-            ct);
+        var result = await _mediator.Send(new ChangePasswordCommand(request.OldPassword, request.NewPassword), ct);
 
         if (result.IsSuccess)
         {

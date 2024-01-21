@@ -12,7 +12,7 @@ public sealed class RegisterEndpoint : Endpoint<RegisterRequest>
     private readonly IMediator _mediator;
 
     public RegisterEndpoint(IMediator mediator) => _mediator = mediator;
-    
+
     public override void Configure()
     {
         Post(Common.Constants.Endpoints.Register);
@@ -21,10 +21,15 @@ public sealed class RegisterEndpoint : Endpoint<RegisterRequest>
 
     public override async Task HandleAsync(RegisterRequest request, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new RegisterUserCommand(request.Login, request.Password, request.Email), cancellationToken);
+        var result = await _mediator.Send(new RegisterUserCommand(request.Login, request.Password, request.Email),
+            cancellationToken);
 
-        // TODO: Validation, implement returning errors from command
-        
-        await this.SendEmptyResponse(result.Status.Resolve(), cancellationToken);
+        if (result.IsSuccess)
+        {
+            await this.SendEmptyResponse(result.Status.Resolve(), cancellationToken);
+            return;
+        }
+
+        await this.ResolveResult(result, cancellationToken);
     }
 }
