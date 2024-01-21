@@ -42,7 +42,7 @@ public class MediatrBaseResult<TResult> : IMediatrBaseResult where TResult : cla
 
 public class MediatrBaseResult : IMediatrBaseResult
 {
-    public bool IsSuccess => Status == ResultStatus.Success;
+    public bool IsSuccess => Status is ResultStatus.Success or ResultStatus.EntityCreated;
 
     public string? Message { get; set; }
 
