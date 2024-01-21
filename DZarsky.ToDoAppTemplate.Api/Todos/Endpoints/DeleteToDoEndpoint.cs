@@ -10,14 +10,27 @@ public sealed class DeleteToDoEndpoint : Endpoint<DeleteToDoRequest>
 {
     private readonly IMediator _mediator;
 
-    public DeleteToDoEndpoint(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public DeleteToDoEndpoint(IMediator mediator) => _mediator = mediator;
 
     public override void Configure()
     {
         Delete(Common.Constants.Endpoints.DeleteOrUpdateTodo);
+        Description(x =>
+                x.Accepts<DeleteToDoRequest>("application/json")
+                 .Produces(204)
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(401)
+                 .Produces(404),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Deletes a ToDo.";
+                x.Responses[204] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[401] = "Authentication error.";
+                x.Responses[404] = "Entity not found.";
+            }
+        );
     }
 
     public override async Task HandleAsync(DeleteToDoRequest request, CancellationToken cancellationToken)

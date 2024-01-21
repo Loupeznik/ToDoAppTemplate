@@ -31,7 +31,15 @@ internal static class ApiConfigurationExtensions
 
         services.AddSingleton(securityConfiguration);
 
-        services.SwaggerDocument();
+        services.SwaggerDocument(opt =>
+        {
+            opt.DocumentSettings = x =>
+            {
+                x.Title = "ToDo API";
+                x.Version = "v1";
+            };
+        });
+
         services
             .AddFastEndpoints()
             .AddJWTBearerAuth(!string.IsNullOrWhiteSpace(securityConfiguration.SigningKey)

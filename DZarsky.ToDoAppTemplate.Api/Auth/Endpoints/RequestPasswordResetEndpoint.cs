@@ -16,6 +16,18 @@ public sealed class RequestPasswordResetEndpoint : Endpoint<RequestPasswordReset
     {
         Post(Common.Constants.Endpoints.RequestPasswordReset);
         AllowAnonymous();
+        Description(x =>
+                x.Accepts<RequestPasswordResetRequest>("application/json")
+                 .Produces(204)
+                 .ProducesProblemDetails(400, "application/json+problem"),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Requests a new password reset code.";
+                x.Responses[204] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+            }
+        );
     }
 
     public override async Task HandleAsync(RequestPasswordResetRequest request, CancellationToken ct)

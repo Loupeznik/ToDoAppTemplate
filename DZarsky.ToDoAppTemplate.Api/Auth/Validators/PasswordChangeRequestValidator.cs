@@ -8,10 +8,6 @@ public sealed class PasswordChangeRequestValidator : Validator<PasswordChangeReq
 {
     public PasswordChangeRequestValidator()
     {
-        RuleFor(x => x.Login)
-            .NotEmpty()
-            .WithMessage("Login cannot be empty.");
-
         RuleFor(x => x.OldPassword)
             .Equal(x => x.NewPassword)
             .WithMessage("New password cannot be the same as old password.");

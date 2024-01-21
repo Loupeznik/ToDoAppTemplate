@@ -11,14 +11,25 @@ public sealed class AddToDoEndpoint : Endpoint<AddToDoRequest, GetToDoResponse>
 {
     private readonly IMediator _mediator;
 
-    public AddToDoEndpoint(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public AddToDoEndpoint(IMediator mediator) => _mediator = mediator;
 
     public override void Configure()
     {
         Post(Common.Constants.Endpoints.Todos);
+        Description(x =>
+                x.Accepts<AddToDoRequest>("application/json")
+                 .Produces<GetToDoResponse>(200, "application/json")
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(401),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Adds a new ToDo.";
+                x.Responses[200] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[401] = "Authentication error.";
+            }
+        );
     }
 
     public override async Task HandleAsync(AddToDoRequest request, CancellationToken cancellationToken)

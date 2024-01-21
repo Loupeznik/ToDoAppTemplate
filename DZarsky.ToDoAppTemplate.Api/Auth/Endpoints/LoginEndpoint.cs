@@ -24,6 +24,20 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
     {
         Post(Common.Constants.Endpoints.Login);
         AllowAnonymous();
+        Description(x =>
+                x.Accepts<LoginRequest>("application/json")
+                 .Produces<LoginResponse>(200, "application/json")
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(401),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Provides an access token.";
+                x.Responses[200] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[401] = "Invalid credentials.";
+            }
+        );
     }
 
     public override async Task HandleAsync(LoginRequest request, CancellationToken cancellationToken)

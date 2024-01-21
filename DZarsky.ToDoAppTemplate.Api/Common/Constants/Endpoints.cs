@@ -12,4 +12,5 @@ public static class Endpoints
 
     public const string Todos = "/todos";
     public const string DeleteOrUpdateTodo = $"{Todos}/{{id}}";
+    public const string CompleteToDo = $"{Todos}/{{id}}/complete";
 }

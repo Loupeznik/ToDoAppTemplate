@@ -17,6 +17,20 @@ public sealed class RegisterEndpoint : Endpoint<RegisterRequest>
     {
         Post(Common.Constants.Endpoints.Register);
         AllowAnonymous();
+        Description(x =>
+                x.Accepts<RegisterRequest>("application/json")
+                 .Produces(201)
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(409),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Registers a new user.";
+                x.Responses[200] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[409] = "Conflict.";
+            }
+        );
     }
 
     public override async Task HandleAsync(RegisterRequest request, CancellationToken cancellationToken)

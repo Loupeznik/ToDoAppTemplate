@@ -11,14 +11,27 @@ public sealed class UpdateToDoEndpoint : Endpoint<UpdateToDoRequest, GetToDoResp
 {
     private readonly IMediator _mediator;
 
-    public UpdateToDoEndpoint(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public UpdateToDoEndpoint(IMediator mediator) => _mediator = mediator;
 
     public override void Configure()
     {
         Put(Common.Constants.Endpoints.DeleteOrUpdateTodo);
+        Description(x =>
+                x.Accepts<CompleteToDoRequest>("application/json")
+                 .Produces<GetToDoResponse>(200, "application/json")
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(401)
+                 .Produces(404),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Updates a ToDo.";
+                x.Responses[200] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[401] = "Authentication error.";
+                x.Responses[404] = "Entity not found.";
+            }
+        );
     }
 
     public override async Task HandleAsync(UpdateToDoRequest request, CancellationToken cancellationToken)

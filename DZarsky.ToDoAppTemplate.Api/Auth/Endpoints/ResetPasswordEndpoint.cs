@@ -16,6 +16,18 @@ public sealed class ResetPasswordEndpoint : Endpoint<PasswordResetRequest>
     {
         Put(Common.Constants.Endpoints.ResetPassword);
         AllowAnonymous();
+        Description(x =>
+                x.Accepts<PasswordResetRequest>("application/json")
+                 .Produces(204)
+                 .ProducesProblemDetails(400, "application/json+problem"),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Resets a user's password.";
+                x.Responses[204] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+            }
+        );
     }
 
     public override async Task HandleAsync(PasswordResetRequest request, CancellationToken ct)

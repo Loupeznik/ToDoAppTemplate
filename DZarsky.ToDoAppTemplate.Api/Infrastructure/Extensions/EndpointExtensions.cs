@@ -25,6 +25,7 @@ internal static class EndpointExtensions
         {
             return endpoint.HttpContext.Response.SendAsync(new ErrorResponse
             {
+                StatusCode = result.Status.Resolve(),
                 Message = result.Message ?? "An error has occured during the request",
                 Errors = errors
             }, result.Status.Resolve(), cancellation: ct);

@@ -11,14 +11,25 @@ public sealed class GetToDosEndpoint : Endpoint<GetToDosRequest, GetToDosRespons
 {
     private readonly IMediator _mediator;
 
-    public GetToDosEndpoint(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public GetToDosEndpoint(IMediator mediator) => _mediator = mediator;
 
     public override void Configure()
     {
         Get(Common.Constants.Endpoints.Todos);
+        Description(x =>
+                x.Accepts<GetToDosRequest>()
+                 .Produces<GetToDosResponse>(200, "application/json")
+                 .ProducesProblemDetails(400, "application/json+problem")
+                 .Produces(401),
+            clearDefaults: true);
+        Summary(x =>
+            {
+                x.Summary = "Gets ToDos for the current user.";
+                x.Responses[200] = "Success.";
+                x.Responses[400] = "Validation error, see Errors in response for details.";
+                x.Responses[401] = "Authentication error.";
+            }
+        );
     }
 
     public override async Task HandleAsync(GetToDosRequest request, CancellationToken cancellationToken)
