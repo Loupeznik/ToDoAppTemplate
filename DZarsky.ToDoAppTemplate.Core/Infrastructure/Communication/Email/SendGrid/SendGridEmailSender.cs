@@ -1,4 +1,5 @@
-﻿using DZarsky.ToDoAppTemplate.Domain.Common;
+﻿using System.Net.Http.Json;
+using DZarsky.ToDoAppTemplate.Domain.Common;
 
 namespace DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email.SendGrid;
 
@@ -11,8 +12,37 @@ public sealed class SendGridEmailSender : IEmailSender
         _httpClient = factory.CreateClient(HttpClients.SendGrid);
     }
 
-    public Task Send(string to, string subject, string body)
+    public async Task Send(string to, string subject, string body)
     {
-        throw new NotImplementedException();
+        // TODO: Add email model, add logging
+        await _httpClient.PostAsJsonAsync("mail/send ", new
+        {
+            personalizations = new[]
+            {
+                new
+                {
+                    to = new[]
+                    {
+                        new
+                        {
+                            email = to
+                        }
+                    },
+                    subject
+                }
+            },
+            from = new
+            {
+                email = "contact@dzarsky.eu",
+            },
+            content = new[]
+            {
+                new
+                {
+                    type = "text/html",
+                    value = body
+                }
+            }
+        });
     }
 }

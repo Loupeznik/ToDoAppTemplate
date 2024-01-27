@@ -6,15 +6,19 @@ using DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email.SendGrid.S
 using DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email.Settings;
 using DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email.Smtp;
 using DZarsky.ToDoAppTemplate.Core.Infrastructure.Security;
+using DZarsky.ToDoAppTemplate.Core.Templating;
 using DZarsky.ToDoAppTemplate.Domain.Common;
+using Fluid.ViewEngine;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace DZarsky.ToDoAppTemplate.Core.Infrastructure.Configuration;
 
 public static class CoreConfigurationExtensions
 {
-    public static void AddToDoCore(this IServiceCollection services, IConfiguration configuration)
+    public static void AddToDoCore(this IServiceCollection services, IConfiguration configuration,
+        IHostEnvironment environment)
     {
         services.AddScoped<AuthManager>();
         services.AddScoped<PasswordValidator>();
@@ -40,6 +44,8 @@ public static class CoreConfigurationExtensions
             services.AddSendGridHttpClient(emailConfig.SendGrid);
             services.AddScoped<IEmailSender, SendGridEmailSender>();
         }
+
+        services.AddTemplating(environment);
     }
 
     private static void AddSendGridHttpClient(this IServiceCollection services, SendGridConfiguration configuration)
@@ -55,5 +61,36 @@ public static class CoreConfigurationExtensions
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", configuration.ApiKey);
         });
+    }
+
+    private static void AddTemplating(this IServiceCollection services, IHostEnvironment hostEnvironment)
+    {
+        var options = new FluidViewEngineOptions
+        {
+#if DEBUG
+            PartialsFileProvider = new FileProviderMapper(hostEnvironment.ContentRootFileProvider,
+                "bin/Debug/net8.0/Templating/Views"),
+            ViewsFileProvider = new FileProviderMapper(hostEnvironment.ContentRootFileProvider,
+                "bin/Debug/net8.0/Templating/Views"),
+#else
+            PartialsFileProvider = new FileProviderMapper(hostEnvironment.ContentRootFileProvider, "Templating/Views"),
+            ViewsFileProvider = new FileProviderMapper(hostEnvironment.ContentRootFileProvider, "Templating/Views"),
+#endif
+
+            LayoutsLocationFormats =
+            {
+                string.Concat("/Email/{0}", Constants.ViewExtension),
+            },
+
+            ViewsLocationFormats =
+            {
+                string.Concat("/Email/{0}", Constants.ViewExtension)
+            },
+        };
+
+        services.AddSingleton(options);
+
+        services.AddSingleton<IFluidViewRenderer>(_ => new FluidViewRenderer(options));
+        services.AddScoped<TemplatingService>();
     }
 }

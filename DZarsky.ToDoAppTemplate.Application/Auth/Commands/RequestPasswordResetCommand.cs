@@ -1,5 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email;
 using DZarsky.ToDoAppTemplate.Core.Infrastructure.Security;
+using DZarsky.ToDoAppTemplate.Core.Templating;
 using DZarsky.ToDoAppTemplate.Data.Infrastructure.EF;
 using DZarsky.ToDoAppTemplate.Domain.Common.Errors;
 using DZarsky.ToDoAppTemplate.Domain.Common.MediatR;
@@ -21,11 +22,16 @@ public sealed class RequestPasswordResetCommandHandler : IRequestHandler<Request
 {
     private readonly DataContext _dataContext;
     private readonly PasswordHasher _passwordHasher;
+    private readonly IEmailSender _emailSender;
+    private readonly TemplatingService _templatingService;
 
-    public RequestPasswordResetCommandHandler(DataContext dataContext, PasswordHasher hasher)
+    public RequestPasswordResetCommandHandler(DataContext dataContext, PasswordHasher hasher, IEmailSender emailSender,
+        TemplatingService templatingService)
     {
         _dataContext = dataContext;
         _passwordHasher = hasher;
+        _emailSender = emailSender;
+        _templatingService = templatingService;
     }
 
     public async Task<MediatrBaseResult> Handle(RequestPasswordResetCommand request,
@@ -60,7 +66,12 @@ public sealed class RequestPasswordResetCommandHandler : IRequestHandler<Request
         await _dataContext.AddAsync(code, cancellationToken);
         await _dataContext.SaveChangesAsync(cancellationToken);
 
-        // send email with code if successful
+        var emailBody = await _templatingService.Render("password-reset", new
+        {
+            code.Code
+        });
+
+        await _emailSender.Send(user.Email, "Password reset request", emailBody);
 
         return new MediatrBaseResult(ResultStatus.Success);
     }

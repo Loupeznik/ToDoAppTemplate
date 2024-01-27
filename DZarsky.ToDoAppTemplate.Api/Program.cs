@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpoints(builder.Configuration);
 builder.Services.AddToDoApplication();
 builder.Services.AddDatabase(builder.Configuration);
-builder.Services.AddToDoCore(builder.Configuration);
+builder.Services.AddToDoCore(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
 
