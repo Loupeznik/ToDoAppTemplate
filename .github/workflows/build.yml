@@ -21,7 +21,7 @@ jobs:
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore --configuration Release
       - name: Create migration bundle
         run: |
           export PATH="$PATH:/root/.dotnet/tools" && \
@@ -29,7 +29,7 @@ jobs:
           --project DZarsky.ToDoAppTemplate.Data/DZarsky.ToDoAppTemplate.Data.csproj --self-contained -r linux-x64 \
           --output publish/efbundle
       - name: Publish
-        run: dotnet publish --no-restore --output publish/app
+        run: dotnet publish --no-restore --configuration Release --output publish/app
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
