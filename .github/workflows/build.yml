@@ -25,8 +25,8 @@ jobs:
       - name: Create migration bundle
         run: |
           export PATH="$PATH:/root/.dotnet/tools" && \
-          dotnet ef migrations bundle --startup-project DZarsky.ToDoAppTemplate.Api/DZarsky.ToDoAppTemplate.Api.csproj \
-          --project DZarsky.ToDoAppTemplate.Data/DZarsky.ToDoAppTemplate.Data.csproj --self-contained -r linux-x64 \
+          dotnet ef migrations bundle --startup-project ToDoAppTemplate.Api/ToDoAppTemplate.Api.csproj \
+          --project ToDoAppTemplate.Data/ToDoAppTemplate.Data.csproj --self-contained -r linux-x64 \
           --output publish/efbundle
       - name: Publish
         run: dotnet publish --no-restore --configuration Release --output publish/app
