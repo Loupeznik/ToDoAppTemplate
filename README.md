@@ -7,7 +7,7 @@ Functionality:
 
 - Create, read, update and delete ToDos
 - User registration, login, option to reset user's password. Accounts are stored in the database, authentication is done using JWT.
-- Email templates and sending emails via Smtp or SendGrid is supported.
+- Email templates and sending emails via Smtp or SendGrid is supported. Email templates are written in [Liquid](https://shopify.github.io/liquid/) templating language.
 
 ## Prerequisites
 
@@ -15,6 +15,7 @@ Functionality:
 - [PostgreSQL](https://www.postgresql.org/download/)
 - [Dotnet ef](https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
 - Optional: [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- Optional: An active [SendGrid](https://sendgrid.com) account with generated API key or a SMTP server for sending email
 
 ## Applying the database migrations
 
