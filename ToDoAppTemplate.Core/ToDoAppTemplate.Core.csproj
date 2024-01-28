@@ -23,7 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Infrastructure\Communication\Email\SendGrid\Models\"/>
         <Folder Include="Templating\Views\"/>
     </ItemGroup>
 

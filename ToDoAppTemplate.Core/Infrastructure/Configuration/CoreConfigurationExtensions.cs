@@ -43,6 +43,7 @@ public static class CoreConfigurationExtensions
         {
             services.AddSendGridHttpClient(emailConfig.SendGrid);
             services.AddScoped<IEmailSender, SendGridEmailSender>();
+            services.AddSingleton(emailConfig.SendGrid);
         }
 
         services.AddTemplating(environment);
