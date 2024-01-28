@@ -1,6 +1,6 @@
 ﻿namespace DZarsky.ToDoAppTemplate.Core.Infrastructure.Communication.Email.Smtp.Settings;
 
-internal sealed class SmtpConfiguration
+public sealed class SmtpConfiguration
 {
     public string Host { get; init; } = string.Empty;
     
