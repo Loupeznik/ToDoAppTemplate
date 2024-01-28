@@ -22,7 +22,7 @@ The database migrations are located in the `ToDoAppTemplate.Data` project. The f
 
 ```powershell
 # Create a new migration
-dotnet ef migrations add MigrationName --project ./ToDoAppTemplate.Data --startup-project ./ToDoAppTemplate/Api
+dotnet ef migrations add MigrationName --project ./ToDoAppTemplate.Data --startup-project ./ToDoAppTemplate.Api
 # Apply a migration
 dotnet ef database update --project ./ToDoAppTemplate.Data --startup-project ./ToDoAppTemplate.Api
 ```
