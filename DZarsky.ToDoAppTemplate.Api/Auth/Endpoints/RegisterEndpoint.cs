@@ -26,7 +26,7 @@ public sealed class RegisterEndpoint : Endpoint<RegisterRequest>
         Summary(x =>
             {
                 x.Summary = "Registers a new user.";
-                x.Responses[200] = "Success.";
+                x.Responses[201] = "Success.";
                 x.Responses[400] = "Validation error, see Errors in response for details.";
                 x.Responses[409] = "Conflict.";
             }

@@ -33,10 +33,11 @@ public sealed class RequestPasswordResetEndpoint : Endpoint<RequestPasswordReset
     public override async Task HandleAsync(RequestPasswordResetRequest request, CancellationToken ct)
     {
         var result = await _mediator.Send(new RequestPasswordResetCommand(request.Login), ct);
-
+        // consider sending 202 and processing in the background
+        
         if (result.IsSuccess)
         {
-            await this.SendEmptyResponse(204, ct); // consider sending 201 (resolve from result)
+            await this.SendEmptyResponse(204, ct);
             return;
         }
 
