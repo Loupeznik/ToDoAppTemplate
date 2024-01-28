@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoAppTemplate.Api", "ToDoAppTemplate.Api\ToDoAppTemplate.Api.csproj", "{5350B641-A885-4200-9EBB-A8D5E3AF8E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoAppTemplate.Domain", "ToDoAppTemplate.Domain\ToDoAppTemplate.Domain.csproj", "{F3F1BF18-D6E3-4A82-8399-961EC71398EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoAppTemplate.Data", "ToDoAppTemplate.Data\ToDoAppTemplate.Data.csproj", "{4DC00F26-D2A1-4DDE-A4C2-420453190C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoAppTemplate.Core", "ToDoAppTemplate.Core\ToDoAppTemplate.Core.csproj", "{B3184BB2-C62F-4935-AE69-A80763B3B06A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7257A7A7-7B34-4C37-8F33-ADDEBB4A3A95}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoAppTemplate.Application", "ToDoAppTemplate.Application\ToDoAppTemplate.Application.csproj", "{FFC9ABAE-F4A1-4378-AC91-DE5974C24343}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5350B641-A885-4200-9EBB-A8D5E3AF8E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5350B641-A885-4200-9EBB-A8D5E3AF8E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5350B641-A885-4200-9EBB-A8D5E3AF8E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5350B641-A885-4200-9EBB-A8D5E3AF8E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F1BF18-D6E3-4A82-8399-961EC71398EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F1BF18-D6E3-4A82-8399-961EC71398EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F1BF18-D6E3-4A82-8399-961EC71398EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F1BF18-D6E3-4A82-8399-961EC71398EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC00F26-D2A1-4DDE-A4C2-420453190C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC00F26-D2A1-4DDE-A4C2-420453190C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC00F26-D2A1-4DDE-A4C2-420453190C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC00F26-D2A1-4DDE-A4C2-420453190C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3184BB2-C62F-4935-AE69-A80763B3B06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3184BB2-C62F-4935-AE69-A80763B3B06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3184BB2-C62F-4935-AE69-A80763B3B06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3184BB2-C62F-4935-AE69-A80763B3B06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC9ABAE-F4A1-4378-AC91-DE5974C24343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC9ABAE-F4A1-4378-AC91-DE5974C24343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC9ABAE-F4A1-4378-AC91-DE5974C24343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC9ABAE-F4A1-4378-AC91-DE5974C24343}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,16 +1,16 @@
 ﻿services:
-  dzarsky.todoapptemplate.api:
-    image: dzarsky.todoapptemplate.api
+  todoapptemplate.api:
+    image: todoapptemplate.api
     depends_on:
-        - db
+      - db
     build:
       context: .
-      dockerfile: DZarsky.ToDoAppTemplate.Api/Dockerfile
+      dockerfile: ToDoAppTemplate.Api/Dockerfile
     links:
       - "db:postgres"
     ports:
-        - "31255:8080"
-        - "31256:8081"
+      - "31255:8080"
+      - "31256:8081"
   db:
     image: postgres:15-alpine3.19
     environment:
@@ -18,7 +18,7 @@
       POSTGRES_PASSWORD: TOD0app24
       POSTGRES_DB: todoapp
     ports:
-        - "31257:5432"
+      - "31257:5432"
     volumes:
       - pgdata-todoapp:/var/lib/postgresql/data
 volumes:
