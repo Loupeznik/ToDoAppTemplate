@@ -2,6 +2,7 @@
 
 public enum SenderType
 {
+    None,
     Smtp,
     SendGrid
 }

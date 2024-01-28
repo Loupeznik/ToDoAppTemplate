@@ -46,6 +46,11 @@ public static class CoreConfigurationExtensions
             services.AddSingleton(emailConfig.SendGrid);
         }
 
+        if (emailConfig.SenderType is SenderType.None)
+        {
+            services.AddScoped<IEmailSender, DummyEmailSender>();
+        }
+
         services.AddTemplating(environment);
     }
 
