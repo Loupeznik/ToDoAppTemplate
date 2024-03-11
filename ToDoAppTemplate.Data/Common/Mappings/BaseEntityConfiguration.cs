@@ -25,6 +25,10 @@ public abstract class BaseEntityConfiguration<TEntity>(string tableName) : IEnti
                .HasDefaultValueSql(Now);
 
         builder.HasIndex(x => x.IsDeleted);
+
+        builder
+            .Property(x => x.IsDeleted)
+            .HasDefaultValue(false);
         
         builder
             .HasQueryFilter(x => !x.IsDeleted);
