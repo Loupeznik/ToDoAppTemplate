@@ -1,6 +1,6 @@
 # ToDo app template API
 
-A template repository for a ToDo app API with .NET8 and PostgreSQL. REPR (FastEndpoints), CQRS (MediatR) and partially Clean Architecture patterns are used.
+A template repository for a ToDo app API with .NET9 and PostgreSQL. REPR (FastEndpoints), CQRS (MediatR) and partially Clean Architecture patterns are used.
 The API is easily extensible and can be used as a starting point for a new project.
 
 Functionality:
@@ -11,7 +11,7 @@ Functionality:
 
 ## Prerequisites
 
-- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [PostgreSQL](https://www.postgresql.org/download/)
 - [Dotnet ef](https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
 - Optional: [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
